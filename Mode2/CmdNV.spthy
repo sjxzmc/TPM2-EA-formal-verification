@@ -1,0 +1,2397 @@
+theory PBS begin
+
+// Function signature and definition of the equational theory E
+
+builtins: multiset
+functions: CkSig/2, H/1, PK/1, Sig/2, fst/1, nvh/0, pair/2, pcrh/0,
+           snd/1, zero/0
+equations:
+    CkSig(Sig(m, k), PK(k)) = m,
+    fst(<x.1, x.2>) = x.1,
+    snd(<x.1, x.2>) = x.2
+
+rule (modulo E) 0:
+   [ ] --[ Init( ) ]-> [ State_0( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___NV___nvh__zero0:
+   [ State_0( ) ] --[ Insert( <'NV', nvh>, zero ) ]-> [ State_01( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PCRV___pcrh__zero01:
+   [ State_01( ) ]
+  --[ Insert( <'PCRV', pcrh>, zero ) ]->
+   [ State_011( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___pcrUpdateCounter___pcrh___zero_011:
+   [ State_011( ) ]
+  --[ Insert( <'pcrUpdateCounter', pcrh>, 'zero' ) ]->
+   [ State_0111( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Rep0111:
+   [ State_0111( ) ] --> [ !State_01111( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par01111:
+   [ !State_01111( ) ] --> [ State_011111( ), State_011112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par011111:
+   [ State_011111( ) ] --> [ State_0111111( ), State_0111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par0111111:
+   [ State_0111111( ) ] --> [ State_01111111( ), State_01111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par01111111:
+   [ State_01111111( ) ]
+  -->
+   [ State_011111111( ), State_011111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par011111111:
+   [ State_011111111( ) ]
+  -->
+   [ State_0111111111( ), State_0111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par0111111111:
+   [ State_0111111111( ) ]
+  -->
+   [ State_01111111111( ), State_01111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par01111111111:
+   [ State_01111111111( ) ]
+  -->
+   [ State_011111111111( ), State_011111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par011111111111:
+   [ State_011111111111( ) ]
+  -->
+   [ State_0111111111111( ), State_0111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par0111111111111:
+   [ State_0111111111111( ) ]
+  -->
+   [ State_01111111111111( ), State_01111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par01111111111111:
+   [ State_01111111111111( ) ]
+  -->
+   [ State_011111111111111( ), State_011111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par011111111111111:
+   [ State_011111111111111( ) ]
+  -->
+   [ State_0111111111111111( ), State_0111111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par0111111111111111:
+   [ State_0111111111111111( ) ]
+  -->
+   [ State_01111111111111111( ), State_01111111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par01111111111111111:
+   [ State_01111111111111111( ) ]
+  -->
+   [ State_011111111111111111( ), State_011111111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par011111111111111111:
+   [ State_011111111111111111( ) ]
+  -->
+   [ State_0111111111111111111( ), State_0111111111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par0111111111111111111:
+   [ State_0111111111111111111( ) ]
+  -->
+   [ State_01111111111111111111( ), State_01111111111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par01111111111111111111:
+   [ State_01111111111111111111( ) ]
+  -->
+   [ State_011111111111111111111( ), State_011111111111111111112( ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par011111111111111111111:
+   [ State_011111111111111111111( ) ]
+  -->
+   [ State_0111111111111111111111( ), State_0111111111111111111112( )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Par0111111111111111111111:
+   [ State_0111111111111111111111( ) ]
+  -->
+   [
+   State_01111111111111111111111( ), State_01111111111111111111112( )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___NewObj___ap_01111111111111111111111:
+   [ State_01111111111111111111111( ), In( <'NewObj', ap> ) ]
+  -->
+   [ State_011111111111111111111111( ap, 'NewObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) new_h011111111111111111111111:
+   [ State_011111111111111111111111( ap, 'NewObj' ), Fr( h ) ]
+  -->
+   [ State_0111111111111111111111111( h, ap, 'NewObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_CreateObj_h__ap_0111111111111111111111111:
+   [ State_0111111111111111111111111( h, ap, 'NewObj' ) ]
+  --[ Event( ), CreateObj( h, ap ) ]->
+   [ State_01111111111111111111111111( h, ap, 'NewObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___AuthP___h__ap01111111111111111111111111:
+   [ State_01111111111111111111111111( h, ap, 'NewObj' ) ]
+  --[ Insert( <'AuthP', h>, ap ) ]->
+   [ State_011111111111111111111111111( h, ap, 'NewObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) out_h011111111111111111111111111:
+   [ State_011111111111111111111111111( h, ap, 'NewObj' ) ]
+  -->
+   [ Out( h ), State_0111111111111111111111111111( h, ap, 'NewObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___startSession__01111111111111111111112:
+   [ State_01111111111111111111112( ), In( 'startSession' ) ]
+  -->
+   [ State_011111111111111111111121( 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) new_h011111111111111111111121:
+   [ State_011111111111111111111121( 'startSession' ), Fr( h ) ]
+  -->
+   [ State_0111111111111111111111211( h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) new_nt0111111111111111111111211:
+   [ State_0111111111111111111111211( h, 'startSession' ), Fr( nt ) ]
+  -->
+   [ State_01111111111111111111112111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_SessionBind_nt__h_01111111111111111111112111:
+   [ State_01111111111111111111112111( nt, h, 'startSession' ) ]
+  --[ Event( ), SessionBind( nt, h ) ]->
+   [ State_011111111111111111111121111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__zero011111111111111111111121111:
+   [ State_011111111111111111111121111( nt, h, 'startSession' ) ]
+  --[ Insert( <'PolD', h>, zero ) ]->
+   [ State_0111111111111111111111211111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___cpHash___h__zero0111111111111111111111211111:
+   [ State_0111111111111111111111211111( nt, h, 'startSession' ) ]
+  --[ Insert( <'cpHash', h>, zero ) ]->
+   [ State_01111111111111111111112111111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___nameHash___h__zero01111111111111111111112111111:
+   [ State_01111111111111111111112111111( nt, h, 'startSession' ) ]
+  --[ Insert( <'nameHash', h>, zero ) ]->
+   [ State_011111111111111111111121111111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___commandCode___h__zero011111111111111111111121111111:
+   [ State_011111111111111111111121111111( nt, h, 'startSession' ) ]
+  --[ Insert( <'commandCode', h>, zero ) ]->
+   [ State_0111111111111111111111211111111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___commandLocality___h__zero0111111111111111111111211111111:
+   [ State_0111111111111111111111211111111( nt, h, 'startSession' ) ]
+  --[ Insert( <'commandLocality', h>, zero ) ]->
+   [ State_01111111111111111111112111111111( nt, h, 'startSession' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isPPRequired___h___CLEAR_01111111111111111111112111111111:
+   [ State_01111111111111111111112111111111( nt, h, 'startSession' ) ]
+  --[ Insert( <'isPPRequired', h>, 'CLEAR' ) ]->
+   [ State_011111111111111111111121111111111( nt, h, 'startSession' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isAuthValueNeeded___h___CLEAR_011111111111111111111121111111111:
+   [ State_011111111111111111111121111111111( nt, h, 'startSession' )
+   ]
+  --[ Insert( <'isAuthValueNeeded', h>, 'CLEAR' ) ]->
+   [ State_0111111111111111111111211111111111( nt, h, 'startSession' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isPasswordNeeded___h___CLEAR_0111111111111111111111211111111111:
+   [ State_0111111111111111111111211111111111( nt, h, 'startSession' )
+   ]
+  --[ Insert( <'isPasswordNeeded', h>, 'CLEAR' ) ]->
+   [
+   State_01111111111111111111112111111111111( nt, h, 'startSession' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___pcrUC___h___zero_01111111111111111111112111111111111:
+   [
+   State_01111111111111111111112111111111111( nt, h, 'startSession' )
+   ]
+  --[ Insert( <'pcrUC', h>, 'zero' ) ]->
+   [
+   State_011111111111111111111121111111111111( nt, h, 'startSession' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___NonceTPM___h__nt011111111111111111111121111111111111:
+   [
+   State_011111111111111111111121111111111111( nt, h, 'startSession' )
+   ]
+  --[ Insert( <'NonceTPM', h>, nt ) ]->
+   [
+   State_0111111111111111111111211111111111111( nt, h, 'startSession'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___checkNVWritten___h___CLEAR_0111111111111111111111211111111111111:
+   [
+   State_0111111111111111111111211111111111111( nt, h, 'startSession'
+   )
+   ]
+  --[ Insert( <'checkNVWritten', h>, 'CLEAR' ) ]->
+   [
+   State_01111111111111111111112111111111111111( nt, h, 'startSession'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___nvWrittenState___h__zero01111111111111111111112111111111111111:
+   [
+   State_01111111111111111111112111111111111111( nt, h, 'startSession'
+   )
+   ]
+  --[ Insert( <'nvWrittenState', h>, zero ) ]->
+   [
+   State_011111111111111111111121111111111111111( nt, h,
+                                                  'startSession'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) out__h__nt_011111111111111111111121111111111111111:
+   [
+   State_011111111111111111111121111111111111111( nt, h,
+                                                  'startSession'
+   )
+   ]
+  -->
+   [
+   Out( <h, nt> ),
+   State_0111111111111111111111211111111111111111( nt, h,
+                                                   'startSession'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___UseObj___hObj__hS_0111111111111111111112:
+   [ State_0111111111111111111112( ), In( <'UseObj', hObj, hS> ) ]
+  -->
+   [ State_01111111111111111111121( hS, hObj, 'UseObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___AuthP___hObj__as_ap01111111111111111111121:
+   [ State_01111111111111111111121( hS, hObj, 'UseObj' ) ]
+  --[ IsIn( <'AuthP', hObj>, ap ) ]->
+   [ State_011111111111111111111211( ap, hS, hObj, 'UseObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___AuthP___hObj__as_ap01111111111111111111121:
+   [ State_01111111111111111111121( hS, hObj, 'UseObj' ) ]
+  --[ IsNotSet( <'AuthP', hObj> ) ]->
+   [ State_011111111111111111111212( hS, hObj, 'UseObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___cpHash___hS__as_cph011111111111111111111211:
+   [ State_011111111111111111111211( ap, hS, hObj, 'UseObj' ) ]
+  --[ IsIn( <'cpHash', hS>, cph ) ]->
+   [ State_0111111111111111111112111( cph, ap, hS, hObj, 'UseObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___cpHash___hS__as_cph011111111111111111111211:
+   [ State_011111111111111111111211( ap, hS, hObj, 'UseObj' ) ]
+  --[ IsNotSet( <'cpHash', hS> ) ]->
+   [ State_0111111111111111111112112( ap, hS, hObj, 'UseObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___nameHash___hS__as_nmh0111111111111111111112111:
+   [ State_0111111111111111111112111( cph, ap, hS, hObj, 'UseObj' ) ]
+  --[ IsIn( <'nameHash', hS>, nmh ) ]->
+   [
+   State_01111111111111111111121111( nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___nameHash___hS__as_nmh0111111111111111111112111:
+   [ State_0111111111111111111112111( cph, ap, hS, hObj, 'UseObj' ) ]
+  --[ IsNotSet( <'nameHash', hS> ) ]->
+   [ State_01111111111111111111121112( cph, ap, hS, hObj, 'UseObj' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___commandCode___hS__as_cc01111111111111111111121111:
+   [
+   State_01111111111111111111121111( nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'commandCode', hS>, cc ) ]->
+   [
+   State_011111111111111111111211111( cc, nmh, cph, ap, hS, hObj,
+                                      'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___commandCode___hS__as_cc01111111111111111111121111:
+   [
+   State_01111111111111111111121111( nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'commandCode', hS> ) ]->
+   [
+   State_011111111111111111111211112( nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___commandLocality___hS__as_Loc011111111111111111111211111:
+   [
+   State_011111111111111111111211111( cc, nmh, cph, ap, hS, hObj,
+                                      'UseObj'
+   )
+   ]
+  --[ IsIn( <'commandLocality', hS>, Loc ) ]->
+   [
+   State_0111111111111111111112111111( Loc, cc, nmh, cph, ap, hS,
+                                       hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___commandLocality___hS__as_Loc011111111111111111111211111:
+   [
+   State_011111111111111111111211111( cc, nmh, cph, ap, hS, hObj,
+                                      'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'commandLocality', hS> ) ]->
+   [
+   State_0111111111111111111112111112( cc, nmh, cph, ap, hS, hObj,
+                                       'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___isPPRequired___hS__as_PP0111111111111111111112111111:
+   [
+   State_0111111111111111111112111111( Loc, cc, nmh, cph, ap, hS,
+                                       hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'isPPRequired', hS>, PP ) ]->
+   [
+   State_01111111111111111111121111111( PP, Loc, cc, nmh, cph, ap, hS,
+                                        hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___isPPRequired___hS__as_PP0111111111111111111112111111:
+   [
+   State_0111111111111111111112111111( Loc, cc, nmh, cph, ap, hS,
+                                       hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'isPPRequired', hS> ) ]->
+   [
+   State_01111111111111111111121111112( Loc, cc, nmh, cph, ap, hS,
+                                        hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___isAuthValueNeeded___hS__as_AV01111111111111111111121111111:
+   [
+   State_01111111111111111111121111111( PP, Loc, cc, nmh, cph, ap, hS,
+                                        hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'isAuthValueNeeded', hS>, AV ) ]->
+   [
+   State_011111111111111111111211111111( AV, PP, Loc, cc, nmh, cph,
+                                         ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___isAuthValueNeeded___hS__as_AV01111111111111111111121111111:
+   [
+   State_01111111111111111111121111111( PP, Loc, cc, nmh, cph, ap, hS,
+                                        hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'isAuthValueNeeded', hS> ) ]->
+   [
+   State_011111111111111111111211111112( PP, Loc, cc, nmh, cph, ap,
+                                         hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___isPasswordNeeded___hS__as_PD011111111111111111111211111111:
+   [
+   State_011111111111111111111211111111( AV, PP, Loc, cc, nmh, cph,
+                                         ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'isPasswordNeeded', hS>, PD ) ]->
+   [
+   State_0111111111111111111112111111111( PD, AV, PP, Loc, cc, nmh,
+                                          cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___isPasswordNeeded___hS__as_PD011111111111111111111211111111:
+   [
+   State_011111111111111111111211111111( AV, PP, Loc, cc, nmh, cph,
+                                         ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'isPasswordNeeded', hS> ) ]->
+   [
+   State_0111111111111111111112111111112( AV, PP, Loc, cc, nmh, cph,
+                                          ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___checkNVWritten___hS__as_NW0111111111111111111112111111111:
+   [
+   State_0111111111111111111112111111111( PD, AV, PP, Loc, cc, nmh,
+                                          cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'checkNVWritten', hS>, NW ) ]->
+   [
+   State_01111111111111111111121111111111( NW, PD, AV, PP, Loc, cc,
+                                           nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___checkNVWritten___hS__as_NW0111111111111111111112111111111:
+   [
+   State_0111111111111111111112111111111( PD, AV, PP, Loc, cc, nmh,
+                                          cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'checkNVWritten', hS> ) ]->
+   [
+   State_01111111111111111111121111111112( PD, AV, PP, Loc, cc, nmh,
+                                           cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___nvWrittenState___hS__as_WS01111111111111111111121111111111:
+   [
+   State_01111111111111111111121111111111( NW, PD, AV, PP, Loc, cc,
+                                           nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'nvWrittenState', hS>, WS ) ]->
+   [
+   State_011111111111111111111211111111111( WS, NW, PD, AV, PP, Loc,
+                                            cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___nvWrittenState___hS__as_WS01111111111111111111121111111111:
+   [
+   State_01111111111111111111121111111111( NW, PD, AV, PP, Loc, cc,
+                                           nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'nvWrittenState', hS> ) ]->
+   [
+   State_011111111111111111111211111111112( NW, PD, AV, PP, Loc, cc,
+                                            nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___NV___nvh__as_nv011111111111111111111211111111111:
+   [
+   State_011111111111111111111211111111111( WS, NW, PD, AV, PP, Loc,
+                                            cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'NV', nvh>, nv ) ]->
+   [
+   State_0111111111111111111112111111111111( nv, WS, NW, PD, AV, PP,
+                                             Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___NV___nvh__as_nv011111111111111111111211111111111:
+   [
+   State_011111111111111111111211111111111( WS, NW, PD, AV, PP, Loc,
+                                            cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'NV', nvh> ) ]->
+   [
+   State_0111111111111111111112111111111112( WS, NW, PD, AV, PP, Loc,
+                                             cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PCRV___pcrh__as_pcrv0111111111111111111112111111111111:
+   [
+   State_0111111111111111111112111111111111( nv, WS, NW, PD, AV, PP,
+                                             Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'PCRV', pcrh>, pcrv ) ]->
+   [
+   State_01111111111111111111121111111111111( pcrv, nv, WS, NW, PD,
+                                              AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PCRV___pcrh__as_pcrv0111111111111111111112111111111111:
+   [
+   State_0111111111111111111112111111111111( nv, WS, NW, PD, AV, PP,
+                                             Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'PCRV', pcrh> ) ]->
+   [
+   State_01111111111111111111121111111111112( nv, WS, NW, PD, AV, PP,
+                                              Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___pcrUpdateCounter___pcrh__as_pc01111111111111111111121111111111111:
+   [
+   State_01111111111111111111121111111111111( pcrv, nv, WS, NW, PD,
+                                              AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'pcrUpdateCounter', pcrh>, pc ) ]->
+   [
+   State_011111111111111111111211111111111111( pc, pcrv, nv, WS, NW,
+                                               PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___pcrUpdateCounter___pcrh__as_pc01111111111111111111121111111111111:
+   [
+   State_01111111111111111111121111111111111( pcrv, nv, WS, NW, PD,
+                                              AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'pcrUpdateCounter', pcrh> ) ]->
+   [
+   State_011111111111111111111211111111111112( pcrv, nv, WS, NW, PD,
+                                               AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___pcrUC___hS__as_pcS011111111111111111111211111111111111:
+   [
+   State_011111111111111111111211111111111111( pc, pcrv, nv, WS, NW,
+                                               PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsIn( <'pcrUC', hS>, pcS ) ]->
+   [
+   State_0111111111111111111112111111111111111( pcS, pc, pcrv, nv, WS,
+                                                NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj,
+                                                'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___pcrUC___hS__as_pcS011111111111111111111211111111111111:
+   [
+   State_011111111111111111111211111111111111( pc, pcrv, nv, WS, NW,
+                                               PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'pcrUC', hS> ) ]->
+   [
+   State_0111111111111111111112111111111111112( pc, pcrv, nv, WS, NW,
+                                                PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj,
+                                                'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___hS__as_pd0111111111111111111112111111111111111:
+   [
+   State_0111111111111111111112111111111111111( pcS, pc, pcrv, nv, WS,
+                                                NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj,
+                                                'UseObj'
+   )
+   ]
+  --[ IsIn( <'PolD', hS>, pd ) ]->
+   [
+   State_01111111111111111111121111111111111111( pd, pcS, pc, pcrv,
+                                                 nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                 hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___hS__as_pd0111111111111111111112111111111111111:
+   [
+   State_0111111111111111111112111111111111111( pcS, pc, pcrv, nv, WS,
+                                                NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS, hObj,
+                                                'UseObj'
+   )
+   ]
+  --[ IsNotSet( <'PolD', hS> ) ]->
+   [
+   State_01111111111111111111121111111111111112( pcS, pc, pcrv, nv,
+                                                 WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                 hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_pd_ap01111111111111111111121111111111111111:
+   [
+   State_01111111111111111111121111111111111111( pd, pcS, pc, pcrv,
+                                                 nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                 hObj, 'UseObj'
+   )
+   ]
+  --[ Eq( pd, ap ) ]->
+   [
+   State_011111111111111111111211111111111111111( pd, pcS, pc, pcrv,
+                                                  nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                  hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__if_pd_ap01111111111111111111121111111111111111:
+   [
+   State_01111111111111111111121111111111111111( pd, pcS, pc, pcrv,
+                                                 nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                 hObj, 'UseObj'
+   )
+   ]
+  --[ NotEq( pd, ap ) ]->
+   [
+   State_011111111111111111111211111111111111112( pd, pcS, pc, pcrv,
+                                                  nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                  hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_UseObj_ap__hS_011111111111111111111211111111111111111:
+   [
+   State_011111111111111111111211111111111111111( pd, pcS, pc, pcrv,
+                                                  nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                  hObj, 'UseObj'
+   )
+   ]
+  --[ Event( ), UseObj( ap, hS ) ]->
+   [
+   State_0111111111111111111112111111111111111111( pd, pcS, pc, pcrv,
+                                                   nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap,
+                                                   hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_CmdCPH_ap__cph_0111111111111111111112111111111111111111:
+   [
+   State_0111111111111111111112111111111111111111( pd, pcS, pc, pcrv,
+                                                   nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap,
+                                                   hS, hObj, 'UseObj'
+   )
+   ]
+  --[ Event( ), CmdCPH( ap, cph ) ]->
+   [
+   State_01111111111111111111121111111111111111111( pd, pcS, pc, pcrv,
+                                                    nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap,
+                                                    hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_CmdNV_ap__nv_01111111111111111111121111111111111111111:
+   [
+   State_01111111111111111111121111111111111111111( pd, pcS, pc, pcrv,
+                                                    nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap,
+                                                    hS, hObj, 'UseObj'
+   )
+   ]
+  --[ Event( ), CmdNV( ap, nv ) ]->
+   [
+   State_011111111111111111111211111111111111111111( pd, pcS, pc,
+                                                     pcrv, nv, WS, NW, PD, AV, PP, Loc, cc, nmh,
+                                                     cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_CmdPCRV_ap__pcrv__pc__pcS_011111111111111111111211111111111111111111:
+   [
+   State_011111111111111111111211111111111111111111( pd, pcS, pc,
+                                                     pcrv, nv, WS, NW, PD, AV, PP, Loc, cc, nmh,
+                                                     cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  --[ Event( ), CmdPCRV( ap, pcrv, pc, pcS ) ]->
+   [
+   State_0111111111111111111112111111111111111111111( pd, pcS, pc,
+                                                      pcrv, nv, WS, NW, PD, AV, PP, Loc, cc, nmh,
+                                                      cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) out__Success_0111111111111111111112111111111111111111111:
+   [
+   State_0111111111111111111112111111111111111111111( pd, pcS, pc,
+                                                      pcrv, nv, WS, NW, PD, AV, PP, Loc, cc, nmh,
+                                                      cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+  -->
+   [
+   Out( 'Success' ),
+   State_01111111111111111111121111111111111111111111( pd, pcS, pc,
+                                                       pcrv, nv, WS, NW, PD, AV, PP, Loc, cc, nmh,
+                                                       cph, ap, hS, hObj, 'UseObj'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Zero011111111111111111111211111111111111112:
+   [
+   State_011111111111111111111211111111111111112( pd, pcS, pc, pcrv,
+                                                  nv, WS, NW, PD, AV, PP, Loc, cc, nmh, cph, ap, hS,
+                                                  hObj, 'UseObj'
+   )
+   ]
+  -->
+   [ ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___NVWrite___v_011111111111111111112:
+   [ State_011111111111111111112( ), In( <'NVWrite', v> ) ]
+  -->
+   [ State_0111111111111111111121( v, 'NVWrite' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___NV___nvh__v0111111111111111111121:
+   [ State_0111111111111111111121( v, 'NVWrite' ) ]
+  --[ Insert( <'NV', nvh>, v ) ]->
+   [ State_01111111111111111111211( v, 'NVWrite' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PCRExtend___v_01111111111111111112:
+   [ State_01111111111111111112( ), In( <'PCRExtend', v> ) ]
+  -->
+   [ State_011111111111111111121( v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PCRV___pcrh__as_pcrv011111111111111111121:
+   [ State_011111111111111111121( v, 'PCRExtend' ) ]
+  --[ IsIn( <'PCRV', pcrh>, pcrv ) ]->
+   [ State_0111111111111111111211( pcrv, v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PCRV___pcrh__as_pcrv011111111111111111121:
+   [ State_011111111111111111121( v, 'PCRExtend' ) ]
+  --[ IsNotSet( <'PCRV', pcrh> ) ]->
+   [ State_0111111111111111111212( v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___pcrUpdateCounter___pcrh__as_pc0111111111111111111211:
+   [ State_0111111111111111111211( pcrv, v, 'PCRExtend' ) ]
+  --[ IsIn( <'pcrUpdateCounter', pcrh>, pc ) ]->
+   [ State_01111111111111111112111( pc, pcrv, v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___pcrUpdateCounter___pcrh__as_pc0111111111111111111211:
+   [ State_0111111111111111111211( pcrv, v, 'PCRExtend' ) ]
+  --[ IsNotSet( <'pcrUpdateCounter', pcrh> ) ]->
+   [ State_01111111111111111112112( pcrv, v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_PCRExtend_pc_01111111111111111112111:
+   [ State_01111111111111111112111( pc, pcrv, v, 'PCRExtend' ) ]
+  --[ Event( ), PCRExtend( pc ) ]->
+   [ State_011111111111111111121111( pc, pcrv, v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___pcrUpdateCounter___pcrh___pc______one__011111111111111111121111:
+   [ State_011111111111111111121111( pc, pcrv, v, 'PCRExtend' ) ]
+  --[ Insert( <'pcrUpdateCounter', pcrh>, ('one'+pc) ) ]->
+   [ State_0111111111111111111211111( pc, pcrv, v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PCRV___pcrh__H__pcrv__v__0111111111111111111211111:
+   [ State_0111111111111111111211111( pc, pcrv, v, 'PCRExtend' ) ]
+  --[ Insert( <'PCRV', pcrh>, H(<pcrv, v>) ) ]->
+   [ State_01111111111111111112111111( pc, pcrv, v, 'PCRExtend' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyAuthorize___h__sig__pk__polR_0111111111111111112:
+   [
+   State_0111111111111111112( ),
+   In( <'PolicyAuthorize', h, sig, pk, polR> )
+   ]
+  -->
+   [ State_01111111111111111121( polR, pk, sig, h, 'PolicyAuthorize' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd01111111111111111121:
+   [ State_01111111111111111121( polR, pk, sig, h, 'PolicyAuthorize' )
+   ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [
+   State_011111111111111111211( pd, polR, pk, sig, h,
+                                'PolicyAuthorize'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd01111111111111111121:
+   [ State_01111111111111111121( polR, pk, sig, h, 'PolicyAuthorize' )
+   ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [
+   State_011111111111111111212( polR, pk, sig, h, 'PolicyAuthorize' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_CkSig_sig__pk___pd__polR_011111111111111111211:
+   [
+   State_011111111111111111211( pd, polR, pk, sig, h,
+                                'PolicyAuthorize'
+   )
+   ]
+  --[ Eq( CkSig(sig, pk), <pd, polR> ) ]->
+   [
+   State_0111111111111111112111( pd, polR, pk, sig, h,
+                                 'PolicyAuthorize'
+   )
+   ]
+
+  /*
+  rule (modulo AC) if_CkSig_sig__pk___pd__polR_011111111111111111211:
+     [
+     State_011111111111111111211( pd, polR, pk, sig, h,
+                                  'PolicyAuthorize'
+     )
+     ]
+    --[ Eq( z, <pd, polR> ) ]->
+     [
+     State_0111111111111111112111( pd, polR, pk, sig, h,
+                                   'PolicyAuthorize'
+     )
+     ]
+    variants (modulo AC)
+    1. pk    = pk.9
+       sig   = sig.11
+       z     = CkSig(sig.11, pk.9)
+    
+    2. pk    = PK(x.11)
+       sig   = Sig(z.10, x.11)
+       z     = z.10
+  */
+
+rule (modulo E) else__if_CkSig_sig__pk___pd__polR_011111111111111111211:
+   [
+   State_011111111111111111211( pd, polR, pk, sig, h,
+                                'PolicyAuthorize'
+   )
+   ]
+  --[ NotEq( CkSig(sig, pk), <pd, polR> ) ]->
+   [
+   State_0111111111111111112112( pd, polR, pk, sig, h,
+                                 'PolicyAuthorize'
+   )
+   ]
+
+  /*
+  rule (modulo AC) else__if_CkSig_sig__pk___pd__polR_011111111111111111211:
+     [
+     State_011111111111111111211( pd, polR, pk, sig, h,
+                                  'PolicyAuthorize'
+     )
+     ]
+    --[ NotEq( z, <pd, polR> ) ]->
+     [
+     State_0111111111111111112112( pd, polR, pk, sig, h,
+                                   'PolicyAuthorize'
+     )
+     ]
+    variants (modulo AC)
+    1. pk    = pk.9
+       sig   = sig.11
+       z     = CkSig(sig.11, pk.9)
+    
+    2. pk    = PK(x.11)
+       sig   = Sig(z.10, x.11)
+       z     = z.10
+  */
+
+rule (modulo E) event_Pol__PolicyAuthorize___h__zero___pk__polR__0111111111111111112111:
+   [
+   State_0111111111111111112111( pd, polR, pk, sig, h,
+                                 'PolicyAuthorize'
+   )
+   ]
+  --[ Event( ), Pol( 'PolicyAuthorize', h, zero, <pk, polR> ) ]->
+   [
+   State_01111111111111111121111( pd, polR, pk, sig, h,
+                                  'PolicyAuthorize'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__zero___PolicyAuthorize____pk__polR___01111111111111111121111:
+   [
+   State_01111111111111111121111( pd, polR, pk, sig, h,
+                                  'PolicyAuthorize'
+   )
+   ]
+  --[ Insert( <'PolD', h>, H(<zero, 'PolicyAuthorize', pk, polR>) )
+  ]->
+   [
+   State_011111111111111111211111( pd, polR, pk, sig, h,
+                                   'PolicyAuthorize'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Zero0111111111111111112112:
+   [
+   State_0111111111111111112112( pd, polR, pk, sig, h,
+                                 'PolicyAuthorize'
+   )
+   ]
+  -->
+   [ ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicySigned___h__sig__pk__polR_011111111111111112:
+   [
+   State_011111111111111112( ),
+   In( <'PolicySigned', h, sig, pk, polR> )
+   ]
+  -->
+   [ State_0111111111111111121( polR, pk, sig, h, 'PolicySigned' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd0111111111111111121:
+   [ State_0111111111111111121( polR, pk, sig, h, 'PolicySigned' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [
+   State_01111111111111111211( pd, polR, pk, sig, h, 'PolicySigned' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd0111111111111111121:
+   [ State_0111111111111111121( polR, pk, sig, h, 'PolicySigned' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_01111111111111111212( polR, pk, sig, h, 'PolicySigned' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___NonceTPM___h__as_nt01111111111111111211:
+   [
+   State_01111111111111111211( pd, polR, pk, sig, h, 'PolicySigned' )
+   ]
+  --[ IsIn( <'NonceTPM', h>, nt ) ]->
+   [
+   State_011111111111111112111( nt, pd, polR, pk, sig, h,
+                                'PolicySigned'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___NonceTPM___h__as_nt01111111111111111211:
+   [
+   State_01111111111111111211( pd, polR, pk, sig, h, 'PolicySigned' )
+   ]
+  --[ IsNotSet( <'NonceTPM', h> ) ]->
+   [
+   State_011111111111111112112( pd, polR, pk, sig, h, 'PolicySigned' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_CkSig_sig__pk___nt__polR_011111111111111112111:
+   [
+   State_011111111111111112111( nt, pd, polR, pk, sig, h,
+                                'PolicySigned'
+   )
+   ]
+  --[ Eq( CkSig(sig, pk), <nt, polR> ) ]->
+   [
+   State_0111111111111111121111( nt, pd, polR, pk, sig, h,
+                                 'PolicySigned'
+   )
+   ]
+
+  /*
+  rule (modulo AC) if_CkSig_sig__pk___nt__polR_011111111111111112111:
+     [
+     State_011111111111111112111( nt, pd, polR, pk, sig, h,
+                                  'PolicySigned'
+     )
+     ]
+    --[ Eq( z, <nt, polR> ) ]->
+     [
+     State_0111111111111111121111( nt, pd, polR, pk, sig, h,
+                                   'PolicySigned'
+     )
+     ]
+    variants (modulo AC)
+    1. pk    = pk.10
+       sig   = sig.12
+       z     = CkSig(sig.12, pk.10)
+    
+    2. pk    = PK(x.12)
+       sig   = Sig(z.11, x.12)
+       z     = z.11
+  */
+
+rule (modulo E) else__if_CkSig_sig__pk___nt__polR_011111111111111112111:
+   [
+   State_011111111111111112111( nt, pd, polR, pk, sig, h,
+                                'PolicySigned'
+   )
+   ]
+  --[ NotEq( CkSig(sig, pk), <nt, polR> ) ]->
+   [
+   State_0111111111111111121112( nt, pd, polR, pk, sig, h,
+                                 'PolicySigned'
+   )
+   ]
+
+  /*
+  rule (modulo AC) else__if_CkSig_sig__pk___nt__polR_011111111111111112111:
+     [
+     State_011111111111111112111( nt, pd, polR, pk, sig, h,
+                                  'PolicySigned'
+     )
+     ]
+    --[ NotEq( z, <nt, polR> ) ]->
+     [
+     State_0111111111111111121112( nt, pd, polR, pk, sig, h,
+                                   'PolicySigned'
+     )
+     ]
+    variants (modulo AC)
+    1. pk    = pk.10
+       sig   = sig.12
+       z     = CkSig(sig.12, pk.10)
+    
+    2. pk    = PK(x.12)
+       sig   = Sig(z.11, x.12)
+       z     = z.11
+  */
+
+rule (modulo E) event_Pol__PolicySigned___h__pd___pk__polR__0111111111111111121111:
+   [
+   State_0111111111111111121111( nt, pd, polR, pk, sig, h,
+                                 'PolicySigned'
+   )
+   ]
+  --[ Event( ), Pol( 'PolicySigned', h, pd, <pk, polR> ) ]->
+   [
+   State_01111111111111111211111( nt, pd, polR, pk, sig, h,
+                                  'PolicySigned'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicySigned____pk__polR___01111111111111111211111:
+   [
+   State_01111111111111111211111( nt, pd, polR, pk, sig, h,
+                                  'PolicySigned'
+   )
+   ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicySigned', pk, polR>) ) ]->
+   [
+   State_011111111111111112111111( nt, pd, polR, pk, sig, h,
+                                   'PolicySigned'
+   )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Zero0111111111111111121112:
+   [
+   State_0111111111111111121112( nt, pd, polR, pk, sig, h,
+                                 'PolicySigned'
+   )
+   ]
+  -->
+   [ ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyOR___h___ld__rd__01111111111111112:
+   [ State_01111111111111112( ), In( <'PolicyOR', h, ld, rd> ) ]
+  -->
+   [ State_011111111111111121( h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd011111111111111121:
+   [ State_011111111111111121( h, 'PolicyOR', ld, rd ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_0111111111111111211( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd011111111111111121:
+   [ State_011111111111111121( h, 'PolicyOR', ld, rd ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_0111111111111111212( h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_pd_ld0111111111111111211:
+   [ State_0111111111111111211( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ Eq( pd, ld ) ]->
+   [ State_01111111111111112111( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__if_pd_ld0111111111111111211:
+   [ State_0111111111111111211( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ NotEq( pd, ld ) ]->
+   [ State_01111111111111112112( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyOR___h__pd___ld__rd__01111111111111112111:
+   [ State_01111111111111112111( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ Event( ), Pol( 'PolicyOR', h, pd, <ld, rd> ) ]->
+   [ State_011111111111111121111( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__zero___PolicyOR____ld__rd___011111111111111121111:
+   [ State_011111111111111121111( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ Insert( <'PolD', h>, H(<zero, 'PolicyOR', ld, rd>) ) ]->
+   [ State_0111111111111111211111( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_pd_rd01111111111111112112:
+   [ State_01111111111111112112( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ Eq( pd, rd ) ]->
+   [ State_011111111111111121121( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__if_pd_rd01111111111111112112:
+   [ State_01111111111111112112( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ NotEq( pd, rd ) ]->
+   [ State_011111111111111121122( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyOR___h__pd___ld__rd__011111111111111121121:
+   [ State_011111111111111121121( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ Event( ), Pol( 'PolicyOR', h, pd, <ld, rd> ) ]->
+   [ State_0111111111111111211211( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__zero___PolicyOR____ld__rd___0111111111111111211211:
+   [ State_0111111111111111211211( pd, h, 'PolicyOR', ld, rd ) ]
+  --[ Insert( <'PolD', h>, H(<zero, 'PolicyOR', ld, rd>) ) ]->
+   [ State_01111111111111112112111( pd, h, 'PolicyOR', ld, rd ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Zero011111111111111121122:
+   [ State_011111111111111121122( pd, h, 'PolicyOR', ld, rd ) ]
+  -->
+   [ ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyNV___h__v_0111111111111112:
+   [ State_0111111111111112( ), In( <'PolicyNV', h, v> ) ]
+  -->
+   [ State_01111111111111121( v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___NV___nvh__as_nv01111111111111121:
+   [ State_01111111111111121( v, h, 'PolicyNV' ) ]
+  --[ IsIn( <'NV', nvh>, nv ) ]->
+   [ State_011111111111111211( nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___NV___nvh__as_nv01111111111111121:
+   [ State_01111111111111121( v, h, 'PolicyNV' ) ]
+  --[ IsNotSet( <'NV', nvh> ) ]->
+   [ State_011111111111111212( v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd011111111111111211:
+   [ State_011111111111111211( nv, v, h, 'PolicyNV' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_0111111111111112111( pd, nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd011111111111111211:
+   [ State_011111111111111211( nv, v, h, 'PolicyNV' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_0111111111111112112( nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_v_nv0111111111111112111:
+   [ State_0111111111111112111( pd, nv, v, h, 'PolicyNV' ) ]
+  --[ Eq( v, nv ) ]->
+   [ State_01111111111111121111( pd, nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__if_v_nv0111111111111112111:
+   [ State_0111111111111112111( pd, nv, v, h, 'PolicyNV' ) ]
+  --[ NotEq( v, nv ) ]->
+   [ State_01111111111111121112( pd, nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyNV___h__pd__v_01111111111111121111:
+   [ State_01111111111111121111( pd, nv, v, h, 'PolicyNV' ) ]
+  --[ Event( ), Pol( 'PolicyNV', h, pd, v ) ]->
+   [ State_011111111111111211111( pd, nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyNV___v__011111111111111211111:
+   [ State_011111111111111211111( pd, nv, v, h, 'PolicyNV' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyNV', v>) ) ]->
+   [ State_0111111111111112111111( pd, nv, v, h, 'PolicyNV' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Zero01111111111111121112:
+   [ State_01111111111111121112( pd, nv, v, h, 'PolicyNV' ) ] --> [ ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyPCR___h__v_011111111111112:
+   [ State_011111111111112( ), In( <'PolicyPCR', h, v> ) ]
+  -->
+   [ State_0111111111111121( v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PCRV___pcrh__as_pcrv0111111111111121:
+   [ State_0111111111111121( v, h, 'PolicyPCR' ) ]
+  --[ IsIn( <'PCRV', pcrh>, pcrv ) ]->
+   [ State_01111111111111211( pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PCRV___pcrh__as_pcrv0111111111111121:
+   [ State_0111111111111121( v, h, 'PolicyPCR' ) ]
+  --[ IsNotSet( <'PCRV', pcrh> ) ]->
+   [ State_01111111111111212( v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd01111111111111211:
+   [ State_01111111111111211( pcrv, v, h, 'PolicyPCR' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_011111111111112111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd01111111111111211:
+   [ State_01111111111111211( pcrv, v, h, 'PolicyPCR' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_011111111111112112( pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) if_v_pcrv011111111111112111:
+   [ State_011111111111112111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ Eq( v, pcrv ) ]->
+   [ State_0111111111111121111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__if_v_pcrv011111111111112111:
+   [ State_011111111111112111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ NotEq( v, pcrv ) ]->
+   [ State_0111111111111121112( pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyPCR___h__pd__v_0111111111111121111:
+   [ State_0111111111111121111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ Event( ), Pol( 'PolicyPCR', h, pd, v ) ]->
+   [ State_01111111111111211111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyPCR___v__01111111111111211111:
+   [ State_01111111111111211111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyPCR', v>) ) ]->
+   [ State_011111111111112111111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___pcrUpdateCounter___pcrh__as_pc011111111111112111111:
+   [ State_011111111111112111111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ IsIn( <'pcrUpdateCounter', pcrh>, pc ) ]->
+   [ State_0111111111111121111111( pc, pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___pcrUpdateCounter___pcrh__as_pc011111111111112111111:
+   [ State_011111111111112111111( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ IsNotSet( <'pcrUpdateCounter', pcrh> ) ]->
+   [ State_0111111111111121111112( pd, pcrv, v, h, 'PolicyPCR' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___pcrUC___h__pc0111111111111121111111:
+   [ State_0111111111111121111111( pc, pd, pcrv, v, h, 'PolicyPCR' ) ]
+  --[ Insert( <'pcrUC', h>, pc ) ]->
+   [ State_01111111111111211111111( pc, pd, pcrv, v, h, 'PolicyPCR' )
+   ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) Zero0111111111111121112:
+   [ State_0111111111111121112( pd, pcrv, v, h, 'PolicyPCR' ) ]
+  -->
+   [ ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyCpHash___h__cph_01111111111112:
+   [ State_01111111111112( ), In( <'PolicyCpHash', h, cph> ) ]
+  -->
+   [ State_011111111111121( cph, h, 'PolicyCpHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd011111111111121:
+   [ State_011111111111121( cph, h, 'PolicyCpHash' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_0111111111111211( pd, cph, h, 'PolicyCpHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd011111111111121:
+   [ State_011111111111121( cph, h, 'PolicyCpHash' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_0111111111111212( cph, h, 'PolicyCpHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyCpHash___h__pd__cph_0111111111111211:
+   [ State_0111111111111211( pd, cph, h, 'PolicyCpHash' ) ]
+  --[ Event( ), Pol( 'PolicyCpHash', h, pd, cph ) ]->
+   [ State_01111111111112111( pd, cph, h, 'PolicyCpHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyCpHash___cph__01111111111112111:
+   [ State_01111111111112111( pd, cph, h, 'PolicyCpHash' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyCpHash', cph>) ) ]->
+   [ State_011111111111121111( pd, cph, h, 'PolicyCpHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___cpHash___h__cph011111111111121111:
+   [ State_011111111111121111( pd, cph, h, 'PolicyCpHash' ) ]
+  --[ Insert( <'cpHash', h>, cph ) ]->
+   [ State_0111111111111211111( pd, cph, h, 'PolicyCpHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyNameHash___h__nmh_0111111111112:
+   [ State_0111111111112( ), In( <'PolicyNameHash', h, nmh> ) ]
+  -->
+   [ State_01111111111121( nmh, h, 'PolicyNameHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd01111111111121:
+   [ State_01111111111121( nmh, h, 'PolicyNameHash' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_011111111111211( pd, nmh, h, 'PolicyNameHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd01111111111121:
+   [ State_01111111111121( nmh, h, 'PolicyNameHash' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_011111111111212( nmh, h, 'PolicyNameHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyNameHash___h__pd__nmh_011111111111211:
+   [ State_011111111111211( pd, nmh, h, 'PolicyNameHash' ) ]
+  --[ Event( ), Pol( 'PolicyNameHash', h, pd, nmh ) ]->
+   [ State_0111111111112111( pd, nmh, h, 'PolicyNameHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyNameHash___nmh__0111111111112111:
+   [ State_0111111111112111( pd, nmh, h, 'PolicyNameHash' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyNameHash', nmh>) ) ]->
+   [ State_01111111111121111( pd, nmh, h, 'PolicyNameHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___nameHash___h__nmh01111111111121111:
+   [ State_01111111111121111( pd, nmh, h, 'PolicyNameHash' ) ]
+  --[ Insert( <'nameHash', h>, nmh ) ]->
+   [ State_011111111111211111( pd, nmh, h, 'PolicyNameHash' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyCommandCode___h__cc_011111111112:
+   [ State_011111111112( ), In( <'PolicyCommandCode', h, cc> ) ]
+  -->
+   [ State_0111111111121( cc, h, 'PolicyCommandCode' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd0111111111121:
+   [ State_0111111111121( cc, h, 'PolicyCommandCode' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_01111111111211( pd, cc, h, 'PolicyCommandCode' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd0111111111121:
+   [ State_0111111111121( cc, h, 'PolicyCommandCode' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_01111111111212( cc, h, 'PolicyCommandCode' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyCommandCode___h__pd__cc_01111111111211:
+   [ State_01111111111211( pd, cc, h, 'PolicyCommandCode' ) ]
+  --[ Event( ), Pol( 'PolicyCommandCode', h, pd, cc ) ]->
+   [ State_011111111112111( pd, cc, h, 'PolicyCommandCode' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyCommandCode___cc__011111111112111:
+   [ State_011111111112111( pd, cc, h, 'PolicyCommandCode' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyCommandCode', cc>) ) ]->
+   [ State_0111111111121111( pd, cc, h, 'PolicyCommandCode' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___commandCode___h__cc0111111111121111:
+   [ State_0111111111121111( pd, cc, h, 'PolicyCommandCode' ) ]
+  --[ Insert( <'commandCode', h>, cc ) ]->
+   [ State_01111111111211111( pd, cc, h, 'PolicyCommandCode' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyLocality___h__Loc_01111111112:
+   [ State_01111111112( ), In( <'PolicyLocality', h, Loc> ) ]
+  -->
+   [ State_011111111121( Loc, h, 'PolicyLocality' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd011111111121:
+   [ State_011111111121( Loc, h, 'PolicyLocality' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_0111111111211( pd, Loc, h, 'PolicyLocality' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd011111111121:
+   [ State_011111111121( Loc, h, 'PolicyLocality' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_0111111111212( Loc, h, 'PolicyLocality' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyLocality___h__pd__Loc_0111111111211:
+   [ State_0111111111211( pd, Loc, h, 'PolicyLocality' ) ]
+  --[ Event( ), Pol( 'PolicyLocality', h, pd, Loc ) ]->
+   [ State_01111111112111( pd, Loc, h, 'PolicyLocality' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyLocality___Loc__01111111112111:
+   [ State_01111111112111( pd, Loc, h, 'PolicyLocality' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyLocality', Loc>) ) ]->
+   [ State_011111111121111( pd, Loc, h, 'PolicyLocality' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___commandLocality___h__Loc011111111121111:
+   [ State_011111111121111( pd, Loc, h, 'PolicyLocality' ) ]
+  --[ Insert( <'commandLocality', h>, Loc ) ]->
+   [ State_0111111111211111( pd, Loc, h, 'PolicyLocality' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyPhysicalPresence___h_0111111112:
+   [ State_0111111112( ), In( <'PolicyPhysicalPresence', h> ) ]
+  -->
+   [ State_01111111121( h, 'PolicyPhysicalPresence' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd01111111121:
+   [ State_01111111121( h, 'PolicyPhysicalPresence' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_011111111211( pd, h, 'PolicyPhysicalPresence' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd01111111121:
+   [ State_01111111121( h, 'PolicyPhysicalPresence' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_011111111212( h, 'PolicyPhysicalPresence' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyPhysicalPresence___h__pd___NULL__011111111211:
+   [ State_011111111211( pd, h, 'PolicyPhysicalPresence' ) ]
+  --[ Event( ), Pol( 'PolicyPhysicalPresence', h, pd, 'NULL' ) ]->
+   [ State_0111111112111( pd, h, 'PolicyPhysicalPresence' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyPhysicalPresence____NULL___0111111112111:
+   [ State_0111111112111( pd, h, 'PolicyPhysicalPresence' ) ]
+  --[
+  Insert( <'PolD', h>, H(<pd, 'PolicyPhysicalPresence', 'NULL'>) )
+  ]->
+   [ State_01111111121111( pd, h, 'PolicyPhysicalPresence' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isPPRequired___h___SET_01111111121111:
+   [ State_01111111121111( pd, h, 'PolicyPhysicalPresence' ) ]
+  --[ Insert( <'isPPRequired', h>, 'SET' ) ]->
+   [ State_011111111211111( pd, h, 'PolicyPhysicalPresence' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyAuthValue___h_011111112:
+   [ State_011111112( ), In( <'PolicyAuthValue', h> ) ]
+  -->
+   [ State_0111111121( h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd0111111121:
+   [ State_0111111121( h, 'PolicyAuthValue' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_01111111211( pd, h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd0111111121:
+   [ State_0111111121( h, 'PolicyAuthValue' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_01111111212( h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyAuthValue___h__pd___NULL__01111111211:
+   [ State_01111111211( pd, h, 'PolicyAuthValue' ) ]
+  --[ Event( ), Pol( 'PolicyAuthValue', h, pd, 'NULL' ) ]->
+   [ State_011111112111( pd, h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyAuthValue____NULL___011111112111:
+   [ State_011111112111( pd, h, 'PolicyAuthValue' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyAuthValue', 'NULL'>) ) ]->
+   [ State_0111111121111( pd, h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isAuthValueNeeded___h___SET_0111111121111:
+   [ State_0111111121111( pd, h, 'PolicyAuthValue' ) ]
+  --[ Insert( <'isAuthValueNeeded', h>, 'SET' ) ]->
+   [ State_01111111211111( pd, h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isPasswordNeeded___h___CLEAR_01111111211111:
+   [ State_01111111211111( pd, h, 'PolicyAuthValue' ) ]
+  --[ Insert( <'isPasswordNeeded', h>, 'CLEAR' ) ]->
+   [ State_011111112111111( pd, h, 'PolicyAuthValue' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyPassword___h_01111112:
+   [ State_01111112( ), In( <'PolicyPassword', h> ) ]
+  -->
+   [ State_011111121( h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd011111121:
+   [ State_011111121( h, 'PolicyPassword' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_0111111211( pd, h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd011111121:
+   [ State_011111121( h, 'PolicyPassword' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_0111111212( h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyPassword___h__pd___NULL__0111111211:
+   [ State_0111111211( pd, h, 'PolicyPassword' ) ]
+  --[ Event( ), Pol( 'PolicyPassword', h, pd, 'NULL' ) ]->
+   [ State_01111112111( pd, h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyPassword____NULL___01111112111:
+   [ State_01111112111( pd, h, 'PolicyPassword' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyPassword', 'NULL'>) ) ]->
+   [ State_011111121111( pd, h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isPasswordNeeded___h___SET_011111121111:
+   [ State_011111121111( pd, h, 'PolicyPassword' ) ]
+  --[ Insert( <'isPasswordNeeded', h>, 'SET' ) ]->
+   [ State_0111111211111( pd, h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___isAuthValueNeeded___h___CLEAR_0111111211111:
+   [ State_0111111211111( pd, h, 'PolicyPassword' ) ]
+  --[ Insert( <'isAuthValueNeeded', h>, 'CLEAR' ) ]->
+   [ State_01111112111111( pd, h, 'PolicyPassword' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyDuplicationSelect___h__cph_0111112:
+   [ State_0111112( ), In( <'PolicyDuplicationSelect', h, cph> ) ]
+  -->
+   [ State_01111121( cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd01111121:
+   [ State_01111121( cph, h, 'PolicyDuplicationSelect' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_011111211( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd01111121:
+   [ State_01111121( cph, h, 'PolicyDuplicationSelect' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_011111212( cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyDuplicationSelect___h__pd__cph_011111211:
+   [ State_011111211( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+  --[ Event( ), Pol( 'PolicyDuplicationSelect', h, pd, cph ) ]->
+   [ State_0111112111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyDuplicationSelect___cph__0111112111:
+   [ State_0111112111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyDuplicationSelect', cph>) )
+  ]->
+   [ State_01111121111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___cpHash___h__cph01111121111:
+   [ State_01111121111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+  --[ Insert( <'cpHash', h>, cph ) ]->
+   [ State_011111211111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___commandCode___h___TPM_CC_Duplicate_011111211111:
+   [ State_011111211111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+  --[ Insert( <'commandCode', h>, 'TPM_CC_Duplicate' ) ]->
+   [ State_0111112111111( pd, cph, h, 'PolicyDuplicationSelect' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) in___PolicyNvWritten___h__ws_011112:
+   [ State_011112( ), In( <'PolicyNvWritten', h, ws> ) ]
+  -->
+   [ State_0111121( ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) lookup___PolD___h__as_pd0111121:
+   [ State_0111121( ws, h, 'PolicyNvWritten' ) ]
+  --[ IsIn( <'PolD', h>, pd ) ]->
+   [ State_01111211( pd, ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) else__lookup___PolD___h__as_pd0111121:
+   [ State_0111121( ws, h, 'PolicyNvWritten' ) ]
+  --[ IsNotSet( <'PolD', h> ) ]->
+   [ State_01111212( ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) event_Pol__PolicyNvWritten___h__pd__ws_01111211:
+   [ State_01111211( pd, ws, h, 'PolicyNvWritten' ) ]
+  --[ Event( ), Pol( 'PolicyNvWritten', h, pd, ws ) ]->
+   [ State_011112111( pd, ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___PolD___h__H__pd___PolicyNvWritten___ws__011112111:
+   [ State_011112111( pd, ws, h, 'PolicyNvWritten' ) ]
+  --[ Insert( <'PolD', h>, H(<pd, 'PolicyNvWritten', ws>) ) ]->
+   [ State_0111121111( pd, ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___checkNVWritten___h___SET_0111121111:
+   [ State_0111121111( pd, ws, h, 'PolicyNvWritten' ) ]
+  --[ Insert( <'checkNVWritten', h>, 'SET' ) ]->
+   [ State_01111211111( pd, ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) insert___nvWrittenState___h__ws01111211111:
+   [ State_01111211111( pd, ws, h, 'PolicyNvWritten' ) ]
+  --[ Insert( <'nvWrittenState', h>, ws ) ]->
+   [ State_011112111111( pd, ws, h, 'PolicyNvWritten' ) ]
+
+  /* has exactly the trivial AC variant */
+
+axiom single_session:
+  "∀ #i #j. ((Init( ) @ #i) ∧ (Init( ) @ #j)) ⇒ (#i = #j)"
+  // safety formula
+
+axiom conditional1:
+  "∀ x y #i. (Eq( x, y ) @ #i) ⇒ (x = y)"
+  // safety formula
+
+axiom conditional2:
+  "∀ x y #i. (NotEq( x, y ) @ #i) ⇒ (¬(x = y))"
+  // safety formula
+
+axiom set_in:
+  "∀ x y #t3.
+    (IsIn( x, y ) @ #t3) ⇒
+    (∃ #t2.
+      (((Insert( x, y ) @ #t2) ∧ (#t2 < #t3)) ∧
+       (∀ #t1. (Delete( x ) @ #t1) ⇒ ((#t1 < #t2) ∨ (#t3 < #t1)))) ∧
+      (∀ #t1 yp.
+        (Insert( x, yp ) @ #t1) ⇒
+        (((#t1 < #t2) ∨ (#t1 = #t2)) ∨ (#t3 < #t1))))"
+
+axiom set_notin:
+  "∀ x #t3.
+    (IsNotSet( x ) @ #t3) ⇒
+    ((∀ #t1 y. (Insert( x, y ) @ #t1) ⇒ (#t3 < #t1)) ∨
+     (∃ #t1.
+       ((Delete( x ) @ #t1) ∧ (#t1 < #t3)) ∧
+       (∀ #t2 y. ((Insert( x, y ) @ #t2) ∧ (#t2 < #t3)) ⇒ (#t2 < #t1))))"
+
+axiom immeadiate_in:
+  "∀ t #i.
+    (ChannelInEvent( t ) @ #i) ⇒
+    (∃ #j.
+      (((K( t ) @ #j) ∧ (#j < #i)) ∧
+       (∀ #k. (Event( ) @ #k) ⇒ ((#k < #j) ∨ (#i < #k)))) ∧
+      (∀ #k t2. (K( t2 ) @ #k) ⇒ (((#k < #j) ∨ (#i < #k)) ∨ (#k = #j))))"
+
+axiom locking:
+  "∀ n x np #i #j.
+    ((Lock( n, x ) @ #i) ∧ (Lock( np, x ) @ #j)) ⇒
+    ((((#i < #j) ∧
+       (∃ #k.
+         ((((Unlock( n, x ) @ #k) ∧ (#i < #k)) ∧ (#k < #j)) ∧
+          (∀ np.1 #l. (Lock( np.1, x ) @ #l) ⇒ (¬((#i < #l) ∧ (#l < #k))))) ∧
+         (∀ np.1 #l.
+           (Unlock( np.1, x ) @ #l) ⇒ (¬((#i < #l) ∧ (#l < #k)))))) ∨
+      (#j < #i)) ∨
+     (#i = #j))"
+
+lemma CmdNV:
+  all-traces
+  "∀ pd nv1 nv2 #i.
+    (CmdNV( H(<pd, 'PolicyNV', nv1>), nv2 ) @ #i) ⇒ (nv1 = nv2)"
+/*
+guarded formula characterizing all counter-examples:
+"∃ pd nv1 nv2 #i.
+  (CmdNV( H(<pd, 'PolicyNV', nv1>), nv2 ) @ #i) ∧ ¬(nv1 = nv2)"
+*/
+simplify
+solve( State_01111111111111111111121111111111111111111( pd, pcS,
+                                                        pc, pcrv, nv2, WS, NW, PD, AV, PP, Loc, cc,
+                                                        nmh, cph, H(<pd.1, 'PolicyNV', nv1>), hS,
+                                                        hObj, 'UseObj'
+       ) ▶₀ #i )
+  case event_CmdCPH_ap__cph_0111111111111111111112111111111111111111
+  solve( Insert( <'PolD', hS>, H(<pd, 'PolicyNV', nv1>) ) @ #t2 )
+    case insert___PolD___h__H__pd___PolicyNV___v__011111111111111211111
+    solve( State_011111111111111211111( pd, nv, nv1, hS, 'PolicyNV'
+           ) ▶₀ #t2 )
+      case event_Pol__PolicyNV___h__pd__v_01111111111111121111
+      solve( Insert( <'pcrUC', hS>, pcS ) @ #t2.1 )
+        case insert___pcrUC___h___zero_01111111111111111111112111111111111
+        solve( State_01111111111111111111112111111111111( nt, hS,
+                                                          'startSession'
+               ) ▶₀ #t2.1 )
+          case insert___isPasswordNeeded___h___CLEAR_0111111111111111111111211111111111
+          solve( Insert( <'pcrUpdateCounter', pcrh>, pc ) @ #t2.2 )
+            case insert___pcrUpdateCounter___pcrh___pc______one__011111111111111111121111
+            by sorry
+          next
+            case insert___pcrUpdateCounter___pcrh___zero_011
+            solve( State_011( ) ▶₀ #t2.2 )
+              case insert___PCRV___pcrh__zero01
+              solve( Insert( <'PCRV', pcrh>, pcrv ) @ #t2.3 )
+                case insert___PCRV___pcrh__H__pcrv__v__0111111111111111111211111
+                by sorry
+              next
+                case insert___PCRV___pcrh__zero01
+                solve( State_01( ) ▶₀ #t2.3 )
+                  case insert___NV___nvh__zero0
+                  solve( Insert( <'NV', nvh>, nv2 ) @ #t2.4 )
+                    case insert___NV___nvh__v0111111111111111111121
+                    by sorry
+                  next
+                    case insert___NV___nvh__zero0
+                    solve( State_0( ) ▶₀ #t2.4 )
+                      case 0
+                      solve( Insert( <'nvWrittenState', ~n>, WS ) @ #t2.5 )
+                        case insert___nvWrittenState___h__ws01111211111
+                        by sorry
+                      next
+                        case insert___nvWrittenState___h__zero01111111111111111111112111111111111111
+                        solve( State_01111111111111111111112111111111111111( nt, ~n,
+                                                                             'startSession'
+                               ) ▶₀ #t2.5 )
+                          case insert___checkNVWritten___h___CLEAR_0111111111111111111111211111111111111
+                          solve( Insert( <'checkNVWritten', ~n>, NW ) @ #t2.6 )
+                            case insert___checkNVWritten___h___CLEAR_0111111111111111111111211111111111111
+                            solve( State_0111111111111111111111211111111111111( nt, ~n,
+                                                                                'startSession'
+                                   ) ▶₀ #t2.6 )
+                              case insert___NonceTPM___h__nt011111111111111111111121111111111111
+                              solve( Insert( <'isPasswordNeeded', ~n>, PD ) @ #t2.7 )
+                                case insert___isPasswordNeeded___h___CLEAR_0111111111111111111111211111111111
+                                solve( State_0111111111111111111111211111111111( nt, ~n,
+                                                                                 'startSession'
+                                       ) ▶₀ #t2.7 )
+                                  case insert___isAuthValueNeeded___h___CLEAR_011111111111111111111121111111111
+                                  solve( Insert( <'isAuthValueNeeded', ~n>, AV ) @ #t2.8 )
+                                    case insert___isAuthValueNeeded___h___CLEAR_011111111111111111111121111111111
+                                    solve( State_011111111111111111111121111111111( nt, ~n,
+                                                                                    'startSession'
+                                           ) ▶₀ #t2.8 )
+                                      case insert___isPPRequired___h___CLEAR_01111111111111111111112111111111
+                                      solve( Insert( <'isPPRequired', ~n>, PP ) @ #t2.9 )
+                                        case insert___isPPRequired___h___CLEAR_01111111111111111111112111111111
+                                        solve( State_01111111111111111111112111111111( nt, ~n,
+                                                                                       'startSession'
+                                               ) ▶₀ #t2.9 )
+                                          case insert___commandLocality___h__zero0111111111111111111111211111111
+                                          solve( Insert( <'commandLocality', ~n>, Loc ) @ #t2.10 )
+                                            case insert___commandLocality___h__Loc011111111121111
+                                            by sorry
+                                          next
+                                            case insert___commandLocality___h__zero0111111111111111111111211111111
+                                            solve( State_0111111111111111111111211111111( nt, ~n,
+                                                                                          'startSession'
+                                                   ) ▶₀ #t2.10 )
+                                              case insert___commandCode___h__zero011111111111111111111121111111
+                                              solve( Insert( <'commandCode', ~n>, cc ) @ #t2.11 )
+                                                case insert___commandCode___h___TPM_CC_Duplicate_011111211111
+                                                by sorry
+                                              next
+                                                case insert___commandCode___h__cc0111111111121111
+                                                by sorry
+                                              next
+                                                case insert___commandCode___h__zero011111111111111111111121111111
+                                                solve( State_011111111111111111111121111111( nt, ~n,
+                                                                                             'startSession'
+                                                       ) ▶₀ #t2.11 )
+                                                  case insert___nameHash___h__zero01111111111111111111112111111
+                                                  solve( Insert( <'nameHash', ~n>, nmh ) @ #t2.12 )
+                                                    case insert___nameHash___h__nmh01111111111121111
+                                                    by sorry
+                                                  next
+                                                    case insert___nameHash___h__zero01111111111111111111112111111
+                                                    solve( State_01111111111111111111112111111( nt,
+                                                                                                ~n,
+                                                                                                'startSession'
+                                                           ) ▶₀ #t2.12 )
+                                                      case insert___cpHash___h__zero0111111111111111111111211111
+                                                      solve( Insert( <'cpHash', ~n>, cph
+                                                             ) @ #t2.13 )
+                                                        case insert___cpHash___h__cph011111111111121111
+                                                        by sorry
+                                                      next
+                                                        case insert___cpHash___h__cph01111121111
+                                                        by sorry
+                                                      next
+                                                        case insert___cpHash___h__zero0111111111111111111111211111
+                                                        solve( State_0111111111111111111111211111( nt,
+                                                                                                   ~n,
+                                                                                                   'startSession'
+                                                               ) ▶₀ #t2.13 )
+                                                          case insert___PolD___h__zero011111111111111111111121111
+                                                          solve( Insert( <'AuthP', hObj>,
+                                                                         H(<pd, 'PolicyNV', nv>)
+                                                                 ) @ #t2.14 )
+                                                            case insert___AuthP___h__ap01111111111111111111111111
+                                                            solve( State_01111111111111111111111111( hObj,
+                                                                                                     H(<
+                                                                                                        pd, 
+                                                                                                        'PolicyNV', 
+                                                                                                        nv
+                                                                                                       >),
+                                                                                                     'NewObj'
+                                                                   ) ▶₀ #t2.14 )
+                                                              case event_CreateObj_h__ap_0111111111111111111111111
+                                                              solve( Insert( <'PolD', ~n>, pd
+                                                                     ) @ #t2.15 )
+                                                                case insert___PolD___h__H__pd___PolicyAuthValue____NULL___011111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyCommandCode___cc__011111111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyCpHash___cph__01111111111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyDuplicationSelect___cph__0111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyLocality___Loc__01111111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyNV___v__011111111111111211111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyNameHash___nmh__0111111111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyNvWritten___ws__011112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyPCR___v__01111111111111211111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyPassword____NULL___01111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicyPhysicalPresence____NULL___0111111112111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__pd___PolicySigned____pk__polR___01111111111111111211111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__zero___PolicyAuthorize____pk__polR___01111111111111111121111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__zero___PolicyOR____ld__rd___011111111111111121111
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__H__zero___PolicyOR____ld__rd___0111111111111111211211
+                                                                by sorry
+                                                              next
+                                                                case insert___PolD___h__zero011111111111111111111121111
+                                                                solve( State_011111111111111111111121111( nt,
+                                                                                                          ~n,
+                                                                                                          'startSession'
+                                                                       ) ▶₀ #t2.15 )
+                                                                  case event_SessionBind_nt__h_01111111111111111111112111
+                                                                  solve( Insert( <'NV', nvh>, nv
+                                                                         ) @ #t2.16 )
+                                                                    case insert___NV___nvh__v0111111111111111111121
+                                                                    solve( State_0111111111111111111121( nv,
+                                                                                                         'NVWrite'
+                                                                           ) ▶₀ #t2.16 )
+                                                                      case in___NVWrite___v_011111111111111111112
+                                                                      solve( !KU( ~n ) @ #vk.4 )
+                                                                        case out__h__nt_011111111111111111111121111111111111111
+                                                                        solve( !KU( ~n.1 ) @ #vk.4 )
+                                                                          case out_h011111111111111111111111111
+                                                                          solve( !KU( H(<zero, 
+                                                                                         'PolicyNV', 
+                                                                                         nv>)
+                                                                                 ) @ #vk.13 )
+                                                                            case cH
+                                                                            SOLVED // trace found
+                                                                          qed
+                                                                        qed
+                                                                      qed
+                                                                    qed
+                                                                  next
+                                                                    case insert___NV___nvh__zero0
+                                                                    by contradiction
+                                                                       // from formulas
+                                                                  qed
+                                                                qed
+                                                              qed
+                                                            qed
+                                                          qed
+                                                        qed
+                                                      qed
+                                                    qed
+                                                  qed
+                                                qed
+                                              qed
+                                            qed
+                                          qed
+                                        qed
+                                      next
+                                        case insert___isPPRequired___h___SET_01111111121111
+                                        by sorry
+                                      qed
+                                    qed
+                                  next
+                                    case insert___isAuthValueNeeded___h___CLEAR_0111111211111
+                                    by sorry
+                                  next
+                                    case insert___isAuthValueNeeded___h___SET_0111111121111
+                                    by sorry
+                                  qed
+                                qed
+                              next
+                                case insert___isPasswordNeeded___h___CLEAR_01111111211111
+                                by sorry
+                              next
+                                case insert___isPasswordNeeded___h___SET_011111121111
+                                by sorry
+                              qed
+                            qed
+                          next
+                            case insert___checkNVWritten___h___SET_0111121111
+                            by sorry
+                          qed
+                        qed
+                      qed
+                    qed
+                  qed
+                qed
+              qed
+            qed
+          qed
+        qed
+      next
+        case insert___pcrUC___h__pc0111111111111121111111
+        by sorry
+      qed
+    qed
+  qed
+qed
+
+/*
+WARNING: the following wellformedness checks failed!
+
+unbound:
+  rule `lookup___AuthP___hObj__as_ap01111111111111111111121' has unbound variables: 
+    ap
+  
+  rule `lookup___cpHash___hS__as_cph011111111111111111111211' has unbound variables: 
+    cph
+  
+  rule `lookup___nameHash___hS__as_nmh0111111111111111111112111' has unbound variables: 
+    nmh
+  
+  rule `lookup___commandCode___hS__as_cc01111111111111111111121111' has unbound variables: 
+    cc
+  
+  rule `lookup___commandLocality___hS__as_Loc011111111111111111111211111' has unbound variables: 
+    Loc
+  
+  rule `lookup___isPPRequired___hS__as_PP0111111111111111111112111111' has unbound variables: 
+    PP
+  
+  rule `lookup___isAuthValueNeeded___hS__as_AV01111111111111111111121111111' has unbound variables: 
+    AV
+  
+  rule `lookup___isPasswordNeeded___hS__as_PD011111111111111111111211111111' has unbound variables: 
+    PD
+  
+  rule `lookup___checkNVWritten___hS__as_NW0111111111111111111112111111111' has unbound variables: 
+    NW
+  
+  rule `lookup___nvWrittenState___hS__as_WS01111111111111111111121111111111' has unbound variables: 
+    WS
+  
+  rule `lookup___NV___nvh__as_nv011111111111111111111211111111111' has unbound variables: 
+    nv
+  
+  rule `lookup___PCRV___pcrh__as_pcrv0111111111111111111112111111111111' has unbound variables: 
+    pcrv
+  
+  rule `lookup___pcrUpdateCounter___pcrh__as_pc01111111111111111111121111111111111' has unbound variables: 
+    pc
+  
+  rule `lookup___pcrUC___hS__as_pcS011111111111111111111211111111111111' has unbound variables: 
+    pcS
+  
+  rule `lookup___PolD___hS__as_pd0111111111111111111112111111111111111' has unbound variables: 
+    pd
+  
+  rule `lookup___PCRV___pcrh__as_pcrv011111111111111111121' has unbound variables: 
+    pcrv
+  
+  rule `lookup___pcrUpdateCounter___pcrh__as_pc0111111111111111111211' has unbound variables: 
+    pc
+  
+  rule `lookup___PolD___h__as_pd01111111111111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd0111111111111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___NonceTPM___h__as_nt01111111111111111211' has unbound variables: 
+    nt
+  
+  rule `lookup___PolD___h__as_pd011111111111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___NV___nvh__as_nv01111111111111121' has unbound variables: 
+    nv
+  
+  rule `lookup___PolD___h__as_pd011111111111111211' has unbound variables: 
+    pd
+  
+  rule `lookup___PCRV___pcrh__as_pcrv0111111111111121' has unbound variables: 
+    pcrv
+  
+  rule `lookup___PolD___h__as_pd01111111111111211' has unbound variables: 
+    pd
+  
+  rule `lookup___pcrUpdateCounter___pcrh__as_pc011111111111112111111' has unbound variables: 
+    pc
+  
+  rule `lookup___PolD___h__as_pd011111111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd01111111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd0111111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd011111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd01111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd0111111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd011111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd01111121' has unbound variables: 
+    pd
+  
+  rule `lookup___PolD___h__as_pd0111121' has unbound variables: 
+    pd
+
+sorts:
+  rule `lookup___PolD___hS__as_pd0111111111111111111112111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `if_pd_ap01111111111111111111121111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `else__if_pd_ap01111111111111111111121111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `event_UseObj_ap__hS_011111111111111111111211111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `event_CmdCPH_ap__cph_0111111111111111111112111111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `event_CmdNV_ap__nv_01111111111111111111121111111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `event_CmdPCRV_ap__pcrv__pc__pcS_011111111111111111111211111111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `out__Success_0111111111111111111112111111111111111111111' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+  
+  rule `Zero011111111111111111111211111111111111112' clashing sorts, casings, or multiplicities:
+    1. PD, pd
+*/
+
+end

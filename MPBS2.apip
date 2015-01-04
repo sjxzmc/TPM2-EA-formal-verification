@@ -1,0 +1,255 @@
+theory PBS
+begin
+
+functions: H/1, zero/0, nvh/0, PK/1, Sig/2, CkSig/2, pcrh/0
+equations: CkSig(Sig(m, k), PK(k)) = m
+builtins: multiset
+
+
+insert <'NV', nvh>, zero; 
+insert <'PCRV', pcrh>, zero; 
+insert <'pcrUpdateCounter', pcrh>, 'zero';
+!(
+//NewObj	
+	(
+	  in(<'NewObj', ap>);new h; event CreateObj(h, ap);
+	  insert <'AuthP', h>, ap;
+	  out(h)
+	)||
+//NewSession
+	( in(<'startSession'>); 
+	  new h; new nt; 
+	  event SessionBind(nt, h);
+	  insert <'PolD', h>, zero;
+	  insert <'cpHash', h>, zero;
+	  insert <'nameHash', h>, zero;
+	  insert <'commandCode', h>, zero;
+	  insert <'commandLocality', h>, zero;
+	  insert <'isPPRequired', h>, 'CLEAR';
+	  insert <'isAuthValueNeeded', h>, 'CLEAR';
+	  insert <'isPasswordNeeded', h>, 'CLEAR';
+	  insert <'pcrUC', h>, 'zero';
+	  insert <'NonceTPM', h>, nt;
+	  insert <'checkNVWritten', h>, 'CLEAR';
+	  insert <'nvWrittenState', h>, zero;
+	  out(<h, nt>)
+	)||
+//UseObj
+	( in(<'UseObj', hObj, hS>);
+	  lookup <'AuthP', hObj> as ap in
+	  lookup <'cpHash', hS> as cph in
+	  lookup <'nameHash', hS> as nmh in
+	  lookup <'commandCode', hS> as cc in
+	  lookup <'commandLocality', hS> as Loc in
+	  lookup <'isPPRequired', hS> as PP in
+	  lookup <'isAuthValueNeeded', hS> as AV in
+	  lookup <'isPasswordNeeded', hS> as PD in
+	  lookup <'checkNVWritten', hS> as NW in
+	  lookup <'nvWrittenState', hS> as WS in
+	  lookup <'NV', nvh> as nv in
+	  lookup <'PCRV', pcrh> as pcrv in
+	  lookup <'pcrUpdateCounter', pcrh> as pc in
+    	  lookup <'pcrUC', hS> as pcS in
+	  lookup <'PolD', hS> as pd in
+	  if pd = ap then
+		event UseObj(ap, hS);
+		event CmdCPH(ap, cph);
+		event CmdNV(ap, nv);
+		event CmdPCRV(ap, pcrv, pc, pcS);
+		out('Success')
+ 	)||
+//NVWrite
+	(
+	in(<'NVWrite', v>);
+//	event NVWrite(v);
+	insert <'NV', nvh>, v
+	)||
+//PCRExtend
+	(
+	in(<'PCRExtend', v>);
+	lookup <'PCRV', pcrh> as pcrv in
+	lookup <'pcrUpdateCounter', pcrh> as pc in
+	event PCRExtend(pc);
+	insert <'pcrUpdateCounter', pcrh>, pc + 'one';
+	insert <'PCRV', pcrh>, H(<pcrv, v>)
+	)||
+//PolicyAuthorize
+	(
+	in(<'PolicyAuthorize', h, sig, pk, polR>);
+	lookup <'PolD', h> as pd in
+	if CkSig(sig, pk) = <pd, polR> then
+		event Pol('PolicyAuthorize', h, zero, <pk, polR>);
+		insert <'PolD', h>, H(<zero, 'PolicyAuthorize', <pk, polR>>)
+	)||
+
+//PolicySigned
+	(
+	in(<'PolicySigned', h, sig, pk, polR>);
+	lookup <'PolD', h> as pd in
+	lookup <'NonceTPM', h> as nt in
+	if CkSig(sig, pk) = <nt, polR> then
+		event Pol('PolicySigned', h, pd, <pk, polR>);
+		insert <'PolD', h>, H(<pd, 'PolicySigned', <pk, polR>>)
+	)||
+//PolicyOR
+	(
+	in(<'PolicyOR', h, <ld, rd>>);
+	lookup <'PolD', h> as pd in
+	if pd = ld then
+		event Pol('PolicyOR', h, pd, <ld, rd>);
+		insert <'PolD', h>, H(<zero, 'PolicyOR', <ld, rd>>)
+	else if pd = rd then
+			event Pol('PolicyOR', h, pd, <ld, rd>);
+			insert <'PolD', h>, H(<zero, 'PolicyOR', <ld, rd>>)			
+	)||
+
+//PolicyNV
+	(
+	in(<'PolicyNV', h, v>);
+	lookup <'NV', nvh> as nv in
+	lookup <'PolD', h> as pd in
+	if v = nv then
+		event Pol('PolicyNV', h, pd, v);
+		insert <'PolD', h>, H(<pd, 'PolicyNV', v>)
+	)||
+//PolicyPCR
+	(
+	in(<'PolicyPCR', h, v>);
+	lookup <'PCRV', pcrh> as pcrv in
+	lookup <'PolD', h> as pd in
+	if v = pcrv then
+		event Pol('PolicyPCR', h, pd, v);			
+		insert <'PolD', h>, H(<pd, 'PolicyPCR', v>);
+		lookup <'pcrUpdateCounter', pcrh> as pc in
+		insert <'pcrUC', h>, pc
+	)||
+
+//PolicyCpHash
+	(
+	in(<'PolicyCpHash', h, cph>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyCpHash', h, pd, cph);
+	insert <'PolD', h>, H(<pd, 'PolicyCpHash', cph>);
+	insert <'cpHash', h>, cph
+	)
+
+//PolicyNameHash
+	||(
+	in(<'PolicyNameHash', h, nmh>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyNameHash', h, pd, nmh);
+	insert <'PolD', h>, H(<pd, 'PolicyNameHash', nmh>);
+	insert <'nameHash', h>, nmh
+	)
+//PolicyCommandCode
+	||(
+	in(<'PolicyCommandCode', h, cc>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyCommandCode', h, pd, cc);
+	insert <'PolD', h>, H(<pd, 'PolicyCommandCode', cc>);
+	insert <'commandCode', h>, cc
+	)
+//PolicyLocality
+	||(
+	in(<'PolicyLocality', h, Loc>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyLocality', h, pd, Loc);
+	insert <'PolD', h>, H(<pd, 'PolicyLocality', Loc>);
+	insert <'commandLocality', h>, Loc
+	)
+//PolicyPhysicalPresence
+	||(
+	in(<'PolicyPhysicalPresence', h>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyPhysicalPresence', h, pd, 'NULL');
+	insert <'PolD', h>, H(<pd, 'PolicyPhysicalPresence', 'NULL'>);
+	insert <'isPPRequired', h>, 'SET'
+	)
+//PolicyAuthValue
+	||(
+	in(<'PolicyAuthValue', h>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyAuthValue', h, pd, 'NULL');
+	insert <'PolD', h>, H(<pd, 'PolicyAuthValue', 'NULL'>);
+	insert <'isAuthValueNeeded', h>, 'SET';
+	insert <'isPasswordNeeded', h>, 'CLEAR'
+	)
+//PolicyPassword
+	||(
+	in(<'PolicyPassword', h>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyPassword', h, pd, 'NULL');
+	insert <'PolD', h>, H(<pd, 'PolicyPassword', 'NULL'>);
+	insert <'isPasswordNeeded', h>, 'SET';
+	insert <'isAuthValueNeeded', h>, 'CLEAR'
+	)
+
+//PolicyDuplicationSelect
+	||(
+	in(<'PolicyDuplicationSelect', h, cph>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyDuplicationSelect', h, pd, cph);
+	insert <'PolD', h>, H(<pd, 'PolicyDuplicationSelect', cph>);
+	insert <'cpHash', h>, cph;
+	insert <'commandCode', h>, 'TPM_CC_Duplicate'
+	)
+//PolicyNvWritten
+	||(
+	in(<'PolicyNvWritten', h, ws>);
+	lookup <'PolD', h> as pd in
+	event Pol('PolicyNvWritten', h, pd, ws);
+	insert <'PolD', h>, H(<pd, 'PolicyNvWritten', ws>);
+	insert <'checkNVWritten', h>, 'SET';
+	insert <'nvWrittenState', h>, ws
+	)
+
+)
+
+//===test
+//lemma NVWrite : exists-trace //verified (3 steps)
+//       "Ex x #i. NVWrite(x)@i"
+
+//lemma PCRExtend : exists-trace //verified (7 steps)
+//       "Ex x #i. PCRExtend(x)@i"
+
+//===automated verified
+
+lemma CorUsePol: //verified (257 steps)
+"All hS pd param Label #t0. UseObj(H(<pd, Label, param>), hS)@t0 
+==> 
+((Ex #t1. not(Label = 'PolicyOR') & Pol(Label, hS, pd, param)@t1 & t1 < t0)|
+(Ex ld rd #t2. (Label = 'PolicyOR')& (pd = zero)& (param = <ld, rd>)& Pol('PolicyOR', hS, ld, param)@t2 & t2 < t0)|
+(Ex ld rd #t3. (Label = 'PolicyOR')& (pd = zero)& (param = <ld, rd>)& Pol('PolicyOR', hS, rd, param)@t3 & t3 < t0))"
+
+lemma CorPol1Pol2: //verified (549 steps)
+"All Label1 param1 Label2 param2 pd hS #t0. Pol(Label1, hS, H(<pd, Label2, param2>), param1)@t0 
+==> 
+((Ex #t1. not(Label2 = 'PolicyOR') & Pol(Label2, hS, pd, param2)@t1 & t1 < t0)|
+(Ex ld rd #t2. (Label2 = 'PolicyOR')& (pd = zero)& (param2 = <ld, rd>)& Pol('PolicyOR', hS, ld, param2)@t2 & t2 < t0)|
+(Ex ld rd #t3. (Label2 = 'PolicyOR')& (pd = zero)& (param2 = <ld, rd>)& Pol('PolicyOR', hS, rd, param2)@t3 & t3 < t0))"
+
+
+lemma PolAuth: //verified (4 steps)
+"All hS sk polR #t0. Pol('PolicyAuthorize', hS, zero, <PK(sk), polR>)@t0
+==> 
+(Ex pd #t1. KU(Sig(<pd, polR>, sk))@t1 & t1<t0)"
+
+lemma PolSigned: //verified (6 steps)
+"All hS sk pd polR #t0. Pol('PolicySigned', hS, pd, <PK(sk), polR>)@t0
+==>
+(Ex nt #t1 #t2. KU(Sig(<nt, polR>, sk))@t1 & t1 <t0 & SessionBind(nt, hS)@t2 & t2 < t0)"
+
+//===attack (can do automated-prove until here)
+
+
+lemma PolCpHash: //race-condition1 falisified
+	"All pd cph1 cph2 #i. CmdCPH(H(<pd, 'PolicyCpHash', cph1>), cph2)@i ==> (cph1 = cph2)"
+
+lemma CmdNV: //misuse-case TOCTOU attack falsified 
+	"All pd nv1 nv2 #i. CmdNV(H(<pd, 'PolicyNV', nv1>), nv2)@i ==> (nv1 = nv2)"
+
+lemma PolPCR: //race-condition2 falisified
+	"All pd pc pcrv1 pcrv2 #i. CmdPCRV(H(<pd, 'PolicyPCR', pcrv1>), pcrv2, pc, pc)@i ==> (pcrv1 = pcrv2)"
+
+
+end

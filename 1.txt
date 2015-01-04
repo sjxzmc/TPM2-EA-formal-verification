@@ -1,0 +1,3 @@
+The files MPBS1.apip and MPBS2.apip are the SAPIC scripts of the formal models of EA mechanisms in Mode 1 and Mode 2. They can be translated into the tamarin-prover scripts.
+
+The other files are the proof transcripts of the formal verification of EA mechanisms in TPM 2.0, which can be verified by the tamarin-prover. 
